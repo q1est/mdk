@@ -32,8 +32,13 @@ export const useBookingStore = () => {
     try {
       await bookingApi.createBooking(data);
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message || 'Ошибка при бронировании');
+    } catch (err) {
+  if (err instanceof Error) {
+    setError(err.message);
+  } else {
+    setError('Ошибка при бронировании');
+  }
+
     } finally {
       setLoading(false);
     }
