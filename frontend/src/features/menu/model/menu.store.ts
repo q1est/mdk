@@ -13,19 +13,19 @@ export const useMenuStore = () => {
     menuApi
       .getMenu()
       .then(res => {
-        setCategories(res.data);
+        const data = Array.isArray(res.data)
+          ? res.data
+          : res.data?.data ?? [];
+
+        setCategories(data);
       })
       .catch(err => {
-        setError(err.message || 'Не удалось загрузить меню');
+        setError(err?.message ?? 'Не удалось загрузить меню');
       })
       .finally(() => {
         setLoading(false);
       });
   }, []);
 
-  return {
-    categories,
-    loading,
-    error,
-  };
+  return { categories, loading, error };
 };

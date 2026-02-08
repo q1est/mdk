@@ -5,7 +5,7 @@ import { MenuList } from './MenuList';
 import { MenuSkeleton } from './MenuSkeleton';
 
 export const MenuPageContent = () => {
-  const { categories, loading, error } = useMenuStore();
+  const { categories = [], loading, error } = useMenuStore();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const categoryNames = useMemo(
@@ -32,3 +32,4 @@ export const MenuPageContent = () => {
     </>
   );
 };
+
